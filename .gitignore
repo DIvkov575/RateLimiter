@@ -2,3 +2,4 @@
 .remember/
 main
 *.o
+service
