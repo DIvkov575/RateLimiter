@@ -1,5 +1,5 @@
 CXX := clang++
-CXXFLAGS := -std=c++20 -Wall -Wextra -O2
+CXXFLAGS := -std=c++20 -Wall -Wextra -O2 -Ilib
 LDFLAGS := -pthread
 
 .PHONY: all clean run
@@ -9,7 +9,7 @@ all: main service
 main: main.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
-service: service.cpp
+service: service.cpp $(wildcard lib/*.hpp)
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
 test_service: test_service.cpp
@@ -19,4 +19,4 @@ run: main
 	./main
 
 clean:
-	rm -f main service
+	rm -f main service test_service
